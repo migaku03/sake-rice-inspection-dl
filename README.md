@@ -84,6 +84,7 @@ $$P_{out} = (P_{in} - Mean_{in}) \times \frac{Std_{target}}{Std_{in}} + Mean_{ta
 │   └── sake_rice_inspection_system.py    [Available]
 ├── requirements.txt    # 環境依存ライブラリ
 └── README.md           # 本ドキュメント
+```
 
 ## 7. 免責事項・データ取り扱い
 * **データ機密性**: 本研究で使用した画像データセットは、兵庫県立農林水産総合技術センターおよび兵庫県立工業技術センターの所有物であり、機密保持契約（NDA）に基づいています。そのため、データセット自体は本リポジトリに含まれません。
