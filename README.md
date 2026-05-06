@@ -80,7 +80,7 @@ $$P_{out} = (P_{in} - Mean_{in}) \times \frac{Std_{target}}{Std_{in}} + Mean_{ta
 
 ```text
 .
-├── docs/               # 論文PDF等のドキュメント
+├── docs/               
 │   └── images/         # README用画像
 ├── notebooks/          # 実験・解析用ノートブック (Refactoring...)
 │   ├── 01_Preprocessing_Cellpose.ipynb   [Release Pending]
