@@ -57,9 +57,16 @@ $$P_{out} = (P_{in} - Mean_{in}) \times \frac{Std_{target}}{Std_{in}} + Mean_{ta
 ![Confusion Matrix](docs/images/confusion_matrix.png)
 *Figure 5: Confusion matrix showing accuracy improvement (判定精度の検証結果)*
 
-* **判定精度**: 識別が困難だった部分的白濁米において, 高いF1スコアを記録. 
-* **ロバスト性**: 幾何学的正規化と背景マスク処理により, 撮影環境の変動に強いパイプラインを構築. 
-* **実用性**: 農業センターの専門検査員の知見をアルゴリズムに組み込み, 社会実装に向けた技術的基盤を確立. 
+### 定量的評価 (Quantitative Evaluation)
+以下の表は, 全18クラスに対する判定性能の比較です. 階層的分類の導入により, 特に適合率（Precision）と再現率（Recall）のバランスが改善されました. 
+
+| 手法 (Method) | Accuracy | Macro Precision | Macro Recall | Macro F1-score |
+| :--- | :---: | :---: | :---: | :---: |
+| 一括分類 (Flat) | 0.887 | 0.826 | 0.791 | 0.804 |
+| **提案手法 (Hierarchical)** | **0.908** | **0.841** | **0.832** | **0.831** |
+
+* **判定精度**: 視覚的特徴が類似し識別が困難だったクラス, 特に部分的白濁米において, 高いF1スコアを記録.
+* **実用性**: 詳細な分類と高い精度を両立し, 社会実装に向けた技術的基盤を確立. 
 
 ## 5. 技術スタック (Tech Stack)
 * **Language**: Python 3.10
