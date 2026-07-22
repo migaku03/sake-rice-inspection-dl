@@ -84,15 +84,17 @@ $$P_{out} = (P_{in} - Mean_{in}) \times \frac{Std_{target}}{Std_{in}} + Mean_{ta
 │   └── images/         # README用画像
 ├── notebooks/          # 実験・解析用ノートブック (Refactoring...)
 │   ├── 01_Preprocessing_Cellpose.ipynb   [Available]
-│   ├── 02_Domain_Adaptation.ipynb        [Release Pending]
+│   ├── 02_Domain_Adaptation.ipynb        [Available]
 │   ├── 03_Training_MultiLabel.ipynb      [Release Pending]
 │   └── 04_Comprehensive_Analysis.ipynb   [Release Pending]
 ├── src/                # 推論パイプラインの実装モジュール
 │   ├── sake_rice_inspection_system.py    [Available] (エンドツーエンド推論プロトタイプ)
 │   └── sake_rice_inspection/             # 個別モジュール (整備完了分から順次追加)
-│       └── preprocessing.py              [Available] (粒検出・切り出しパイプライン)
+│       ├── preprocessing.py              [Available] (粒検出・切り出しパイプライン)
+│       └── domain_adaptation.py          [Available] (統計量ジッタリングによるドメイン適応)
 ├── tests/              # pytestによる単体テスト
-│   └── test_preprocessing.py
+│   ├── test_preprocessing.py
+│   └── test_domain_adaptation.py
 ├── Dockerfile          # 再現可能な実行環境
 ├── requirements.txt    # 環境依存ライブラリ
 └── README.md           # 本ドキュメント
