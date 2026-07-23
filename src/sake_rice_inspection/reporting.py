@@ -47,7 +47,10 @@ def create_unified_prediction_excel(
         img_path = result["img_path"]
         probs = result["probs"]
         pred_labels = (probs >= 0.5).astype(int)
-        pred_label_str = "+".join(cls for i, cls in enumerate(class_names) if pred_labels[i] == 1) or "None"
+        # "None" is deliberately avoided: pandas' default na_values list treats the
+        # literal string "None" (and "NA", "null", etc.) as missing data, so it would
+        # silently turn into NaN the next time this workbook is read with read_excel.
+        pred_label_str = "+".join(cls for i, cls in enumerate(class_names) if pred_labels[i] == 1) or "no_prediction"
 
         try:
             pil_img = Image.open(img_path).convert("RGB")

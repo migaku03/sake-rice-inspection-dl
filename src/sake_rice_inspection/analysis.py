@@ -299,6 +299,23 @@ def labels_to_presence_strings(values: np.ndarray, absent: str = "無", present:
     return np.array([absent if v == 0 else present for v in values])
 
 
+def normalize_filename_key(filename: Any) -> str:
+    """Normalizes a workbook filename for cross-file matching.
+
+    `all_predictions.xlsx` stores each grain's path relative to its crop
+    directory, using whatever OS generated it (backslashes on Windows,
+    forward slashes on Linux/macOS). Comparing or joining filenames across
+    workbooks produced on different platforms requires a common separator.
+
+    Args:
+        filename (Any): A filename/path value, typically from a workbook cell.
+
+    Returns:
+        str: The filename with backslashes normalized to forward slashes.
+    """
+    return str(filename).replace("\\", "/")
+
+
 def integrate_hierarchical_predictions(df_layer1: pd.DataFrame, true_map: Dict[str, Any], layer2_map: Dict[str, Any]) -> pd.DataFrame:
     """Combines layer-1 (coarse) and layer-2 (fine) predictions into one result.
 
@@ -319,7 +336,7 @@ def integrate_hierarchical_predictions(df_layer1: pd.DataFrame, true_map: Dict[s
     """
     rows = []
     for _, row in df_layer1.iterrows():
-        filename = str(row.iloc[1])
+        filename = normalize_filename_key(row.iloc[1])
         layer1_pred = row.iloc[3]
         final_true = true_map.get(filename, row.iloc[2])
         final_pred = layer2_map[filename] if (row.iloc[2] == layer1_pred and filename in layer2_map) else layer1_pred

@@ -12,6 +12,7 @@ from sake_rice_inspection.analysis import (
     hamming_accuracy_label_mean,
     integrate_hierarchical_predictions,
     labels_to_presence_strings,
+    normalize_filename_key,
     order_labels,
     plot_confusion_matrix,
     split_label,
@@ -151,3 +152,27 @@ def test_integrate_hierarchical_predictions_falls_back_when_layer1_wrong():
     result = integrate_hierarchical_predictions(df_layer1, true_map, layer2_map)
 
     assert result["pred"].iloc[0] == "Cracked"
+
+
+def test_normalize_filename_key_converts_backslashes():
+    assert normalize_filename_key("基白\\6_基白粒反射_grain_0005.jpg") == "基白/6_基白粒反射_grain_0005.jpg"
+    assert normalize_filename_key("基白/6_基白粒反射_grain_0005.jpg") == "基白/6_基白粒反射_grain_0005.jpg"
+
+
+def test_integrate_hierarchical_predictions_matches_across_path_separators():
+    # Regression test: workbooks generated on Windows use backslash-separated
+    # filenames, while ones generated on Linux use forward slashes. Without
+    # normalization, cross-referencing true_map/layer2_map by raw filename
+    # silently fails to match, and every grain falls back to the coarse
+    # layer-1 label.
+    df_layer1 = pd.DataFrame({
+        "img": ["a.jpg"], "filename": ["Colored\\a.jpg"],
+        "true": ["Colored"], "pred": ["Colored"],
+    })
+    true_map = {"Colored/a.jpg": "Spotted"}
+    layer2_map = {"Colored/a.jpg": "Spotted"}
+
+    result = integrate_hierarchical_predictions(df_layer1, true_map, layer2_map)
+
+    assert result["pred"].iloc[0] == "Spotted"
+    assert result["true"].iloc[0] == "Spotted"
