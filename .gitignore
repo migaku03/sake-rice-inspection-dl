@@ -216,3 +216,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project-specific: NDA-protected dataset and generated artifacts.
+# Notebooks write real grain crops, masks, model weights, and per-grain
+# prediction thumbnails (all_predictions.xlsx) here when run against the
+# real dataset — none of this may be committed, only the notebooks'
+# own cell outputs (plots/tables) are intended for publication.
+data/
+outputs/
+*.pt
+*.pth
+*.xlsx
+.ipynb_checkpoints/
