@@ -75,21 +75,21 @@ $$P_{out} = (P_{in} - Mean_{in}) \times \frac{Std_{target}}{Std_{in}} + Mean_{ta
 * **Data Analysis**: Pandas, Matplotlib, Openpyxl
 
 ## 6. リポジトリ構成 (Repository Structure)
-現在, 研究用コードを公開用にリファクタリング中です. 整備が完了したものから順次公開します. 
-(Currently refactoring research notebooks for public release. High-quality implementations will be released sequentially.)
+研究用ノートブックの公開用リファクタリングが完了しています(学習済みモデル重みと元データセットはNDAのため非公開).
+(Refactoring of the research notebooks for public release is complete; trained model weights and the original dataset remain excluded under NDA.)
 
 ```text
 .
 ├── docs/               
 │   └── images/         # README用画像
-├── notebooks/          # 実験・解析用ノートブック (Refactoring...)
+├── notebooks/          # 実験・解析用ノートブック
 │   ├── 01_Preprocessing_Cellpose.ipynb   [Available]
 │   ├── 02_Domain_Adaptation.ipynb        [Available]
 │   ├── 03_Training_MultiLabel.ipynb      [Available]
-│   └── 04_Comprehensive_Analysis.ipynb   [Release Pending]
+│   └── 04_Comprehensive_Analysis.ipynb   [Available]
 ├── src/                # 推論パイプラインの実装モジュール
 │   ├── sake_rice_inspection_system.py    [Available] (エンドツーエンド推論プロトタイプ)
-│   └── sake_rice_inspection/             # 個別モジュール (整備完了分から順次追加)
+│   └── sake_rice_inspection/             # 個別モジュール
 │       ├── preprocessing.py              [Available] (粒検出・切り出しパイプライン)
 │       ├── domain_adaptation.py          [Available] (統計量ジッタリングによるドメイン適応)
 │       ├── folds.py                      [Available] (マルチラベル学習セット作成)
@@ -97,8 +97,9 @@ $$P_{out} = (P_{in} - Mean_{in}) \times \frac{Std_{target}}{Std_{in}} + Mean_{ta
 │       ├── models.py                     [Available] (バックボーン構築)
 │       ├── training.py                   [Available] (学習・評価ループ)
 │       ├── experiment.py                 [Available] (実験ディレクトリ管理)
-│       └── reporting.py                  [Available] (Excel予測結果出力)
-├── tests/              # pytestによる単体テスト (53 tests)
+│       ├── reporting.py                  [Available] (Excel予測結果出力)
+│       └── analysis.py                   [Available] (階層 vs 一括分類の比較分析)
+├── tests/              # pytestによる単体テスト (67 tests)
 ├── Dockerfile          # 再現可能な実行環境
 ├── requirements.txt    # 環境依存ライブラリ
 └── README.md           # 本ドキュメント
