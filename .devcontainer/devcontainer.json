@@ -1,0 +1,19 @@
+{
+  "name": "sake-rice-inspection-dl",
+  "image": "sake-rice-inspection-dl:dev",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/app,type=bind,consistency=cached",
+  "workspaceFolder": "/app",
+  "mounts": [
+    "source=${localWorkspaceFolder}/../../data,target=/private/data,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/../../outputs,target=/private/outputs,type=bind,consistency=cached"
+  ],
+  "remoteEnv": {
+    "PYTHONPATH": "/app/src"
+  },
+  "postCreateCommand": "pip install --no-cache-dir jupyter ipykernel",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-toolsai.jupyter", "ms-python.python"]
+    }
+  }
+}

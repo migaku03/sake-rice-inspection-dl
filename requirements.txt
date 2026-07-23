@@ -1,6 +1,11 @@
 # Core dependencies actually used by src/ and tests/.
 # Trimmed from a raw `pip freeze` (185 packages) down to what the published
 # code imports. See README for the reproduction command.
+#
+# torch/torchvision are pulled from the CUDA 12.8 wheel index because
+# Blackwell-generation GPUs (e.g. RTX 50-series, compute capability sm_120)
+# are only supported starting with these builds.
+--extra-index-url https://download.pytorch.org/whl/cu128
 numpy==2.2.1
 pandas==2.2.3
 scikit-image==0.25.0
@@ -9,8 +14,8 @@ matplotlib==3.10.0
 seaborn==0.13.2
 Pillow==11.1.0
 openpyxl==3.1.5
-torch==2.5.1
-torchvision==0.20.1
+torch==2.11.0
+torchvision==0.26.0
 cellpose==4.0.2
 opencv-python-headless==4.11.0.86
 
