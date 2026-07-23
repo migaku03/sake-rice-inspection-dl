@@ -85,16 +85,20 @@ $$P_{out} = (P_{in} - Mean_{in}) \times \frac{Std_{target}}{Std_{in}} + Mean_{ta
 ├── notebooks/          # 実験・解析用ノートブック (Refactoring...)
 │   ├── 01_Preprocessing_Cellpose.ipynb   [Available]
 │   ├── 02_Domain_Adaptation.ipynb        [Available]
-│   ├── 03_Training_MultiLabel.ipynb      [Release Pending]
+│   ├── 03_Training_MultiLabel.ipynb      [Available]
 │   └── 04_Comprehensive_Analysis.ipynb   [Release Pending]
 ├── src/                # 推論パイプラインの実装モジュール
 │   ├── sake_rice_inspection_system.py    [Available] (エンドツーエンド推論プロトタイプ)
 │   └── sake_rice_inspection/             # 個別モジュール (整備完了分から順次追加)
 │       ├── preprocessing.py              [Available] (粒検出・切り出しパイプライン)
-│       └── domain_adaptation.py          [Available] (統計量ジッタリングによるドメイン適応)
-├── tests/              # pytestによる単体テスト
-│   ├── test_preprocessing.py
-│   └── test_domain_adaptation.py
+│       ├── domain_adaptation.py          [Available] (統計量ジッタリングによるドメイン適応)
+│       ├── folds.py                      [Available] (マルチラベル学習セット作成)
+│       ├── datasets.py                   [Available] (前処理・データ拡張・Dataset)
+│       ├── models.py                     [Available] (バックボーン構築)
+│       ├── training.py                   [Available] (学習・評価ループ)
+│       ├── experiment.py                 [Available] (実験ディレクトリ管理)
+│       └── reporting.py                  [Available] (Excel予測結果出力)
+├── tests/              # pytestによる単体テスト (53 tests)
 ├── Dockerfile          # 再現可能な実行環境
 ├── requirements.txt    # 環境依存ライブラリ
 └── README.md           # 本ドキュメント
