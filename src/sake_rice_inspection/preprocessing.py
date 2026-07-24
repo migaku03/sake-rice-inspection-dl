@@ -17,6 +17,7 @@ from typing import Any, Dict, List, Tuple
 
 import numpy as np
 import pandas as pd
+from PIL import Image
 from skimage import io as skio
 from skimage.color import label2rgb
 from skimage.measure import regionprops, regionprops_table
@@ -266,7 +267,10 @@ def process_directory(
                 for prop in props:
                     grain_img, grain_mask = extract_grain(image, prop, filtered_mask, margin=margin)
                     stem = f"{img_path.stem}_grain_{prop.label:04d}"
-                    skio.imsave(image_output_dir / f"{stem}.jpg", grain_img, quality=95)
+                    # Saved via PIL rather than skio.imsave: skimage's imsave forwards
+                    # `quality` as a plugin kwarg, which triggers a FutureWarning about
+                    # the deprecated plugin_args mechanism as of scikit-image 0.25.
+                    Image.fromarray(grain_img).save(image_output_dir / f"{stem}.jpg", quality=95)
                     skio.imsave(image_crop_mask_dir / f"{stem}_mask.png", grain_mask)
                     grain_count += 1
 
